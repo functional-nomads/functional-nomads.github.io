@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Org-Testing"
+date:   2014-01-02
+categories: clojure test
+---
+
+* Test of org-mode
+** Subcategory
+  - one point
+  - another one http://planet.clojure.org/
+
+* Another chapter
