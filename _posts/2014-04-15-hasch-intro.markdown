@@ -38,8 +38,10 @@ edn-data into sha-1 and trust it to avoid collisions then. You can also
 use a different hashing algorithm and create similar UUIDs (but this
 doesn't satisfy the UUID standard yet).  Our UUID hash is internally
 versioned, so it can be fixed 4 times (before hopefully UUID5 will be
-superseeded anyway). Don't consider it stable yet, but only after the
-next release and possible feedback.
+superseeded anyway). 
+
+Don't consider the hash stable yet, but only after some possible initial
+feedback for the next release.
 
 # future plans
 
@@ -47,7 +49,9 @@ One design idea is to be able to hash nested collections first with the
 hash-function before they contribute to the overall hash-value, allowing
 you to break them out and store them under their nested hash-value,
 potentially building persistent data-structures which can share values
-without needing to rehash all data on changes. This is not used yet.
+without needing to rehash all data on changes. This is implemented but
+not used yet. Strings are currently seen as primitives and not
+hashed that way.
 
 In general we want to rely on it to build a distributed database.
 
@@ -63,6 +67,10 @@ if you happen to need that and you can also create random UUIDs with:
 => #uuid "a948572d-4e2a-466d-9963-740824526e7e"
 
 {% endhighlight %}
+
+which uses
+ [Frank Siebenlist's code](https://github.com/whodidthis/cljs-uuid-utils/blob/master/src/cljs_uuid_utils.cljs)
+ on cljs and `java.util.UUID/randomUUID`.
 
 
 If you have ideas or find any flaws, please open an issue on github or
