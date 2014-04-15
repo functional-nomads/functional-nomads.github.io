@@ -8,40 +8,44 @@ categories: clojure clojurescript
 # announcing *hasch*
 
 I just want to briefly announce
-[hasch](http://github.org/ghubber/hasch), a small library to
-consistently crypto-hash edn in Clojure and ClojureScript. Practically
-this means you can create a UUID5 from edn on either platform
-consistently (patches for CLR or other Clojure hosts welcome). Compared
-to just hashing a printed edn-string it respects maps and sets as
-commutative and uses bitwise XOR to achieve the same hash-value
-independant of order.
-
-{% highlight clojure %}
+[hasch](https://github.org/ghubber/hasch), a small library to
+consistently crypto-hash [edn](https://github.com/edn-format/edn) in
+Clojure and ClojureScript. Practically this means you can create a UUID5
+from edn on either platform consistently (patches for CLR or other
+Clojure hosts welcome). {% highlight clojure %}
 
 (uuid ["hello world" {:a 3.14} #{42} '(if true nil \f)]) 
 => #uuid "18f594a3-be77-5449-a0b5-b71552e1d37a"
 
-{% endhighlight %}
+{% endhighlight %} 
+
+Compared to just hashing a printed edn-string it respects maps and sets
+as commutative and uses bitwise XOR to achieve the same hash-value
+independant of order. Comments and other syntax specific problems are
+also cleanly avoided as hasch works on the runtime value, e.g. after
+reading an edn string. Metadata is currently ignored.
 
 We are using it in a cross-platform prototype-level
 [repository system](https://github.com/ghubber/geschichte) and it works
 out fine so far, but should not yet be considered production-ready as I
-want to get some feedback first and fix the following issue: I am not
-yet sure whether to extend Clojure protocols or only collections (this
-is how it is done in cljs atm.), as both can be considered edn at
-runtime, but may not satisfy value semantics (e.g. mutable arrays).
+want to get critical feedback first and fix the following issue: I am
+not yet sure whether to extend Clojure protocols or only Clojure
+collections (this is how it is done in cljs atm.), as both can be
+considered edn at runtime, but may not satisfy value semantics
+(e.g. mutable arrays).
 
 # cryptography
 
 I am also not a cryptography expert, I tried to get all bits of the
-edn-data into sha-1 and trust it to avoid collisions then. You can also
-use a different hashing algorithm and create similar UUIDs (but this
-doesn't satisfy the UUID standard yet).  Our UUID hash is internally
-versioned, so it can be fixed 4 times (before hopefully UUID5 will be
-superseeded anyway). 
+edn-data into sha-1 and trust it to avoid collisions then. I encode a
+flat edn-level type information (e.g. strings and chars are the same
+type because of JavaScript). You can also use a different hashing
+algorithm and create similar UUIDs (but this doesn't satisfy the UUID
+standard yet).  Our UUID hash is internally versioned, so it can be
+fixed 4 times (before hopefully UUID5 will be superseded anyway).
 
 Don't consider the hash stable yet, but only after some possible initial
-feedback for the next release.
+feedback for the next release(s).
 
 # future plans
 
@@ -59,7 +63,7 @@ In general we want to rely on it to build a distributed database.
 
 I have ported
 [Utf-8 encoding from JavaScript to ClojureScript](https://github.com/ghubber/hasch/blob/master/src/cljs/hasch/platform.cljs#L68)
-if you happen to need that and you can also create random UUIDs with:
+if you happen to need that. You can also create random UUIDs with:
 
 {% highlight clojure %}
 
@@ -70,7 +74,7 @@ if you happen to need that and you can also create random UUIDs with:
 
 which uses
  [Frank Siebenlist's code](https://github.com/whodidthis/cljs-uuid-utils/blob/master/src/cljs_uuid_utils.cljs)
- on cljs and `java.util.UUID/randomUUID`.
+ in cljs and `java.util.UUID/randomUUID` in Clojure.
 
 
 If you have ideas or find any flaws, please open an issue on github or
