@@ -7,13 +7,14 @@ categories: clojure clojurescript
 
 # announcing *hasch*
 
-I just want to briefly announce [hasch](http://github.org/hasch), a
-small library to consistently crypto-hash edn in Clojure and
-ClojureScript. Practically this means you can create a UUID5 from edn on
-either platform consistently (patches for CLR or other Clojure hosts
-welcome). Compared to just hashing a printed edn-string it respects maps
-and sets as commutative and uses bitwise XOR to achieve the same
-hash-value independant of order.
+I just want to briefly announce
+[hasch](http://github.org/ghubber/hasch), a small library to
+consistently crypto-hash edn in Clojure and ClojureScript. Practically
+this means you can create a UUID5 from edn on either platform
+consistently (patches for CLR or other Clojure hosts welcome). Compared
+to just hashing a printed edn-string it respects maps and sets as
+commutative and uses bitwise XOR to achieve the same hash-value
+independant of order.
 
 {% highlight clojure %}
 
@@ -52,8 +53,9 @@ In general we want to rely on it to build a distributed database.
 
 # details
 
-I have ported Utf-8 encoding from JavaScript to ClojureScript and you
-can also create random UUIDs with:
+I have ported
+[Utf-8 encoding from JavaScript to ClojureScript](https://github.com/ghubber/hasch/blob/master/src/cljs/hasch/platform.cljs#L68)
+if you happen to need that and you can also create random UUIDs with:
 
 {% highlight clojure %}
 
@@ -63,5 +65,5 @@ can also create random UUIDs with:
 {% endhighlight %}
 
 
-If you have ideas or find any flaws, please open an issue or leave a
-comment. Patches are welcome!
+If you have ideas or find any flaws, please open an issue on github or
+leave a comment. Pull-requests are welcome!
