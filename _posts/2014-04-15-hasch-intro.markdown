@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Crypto-Hashing for edn on Clojure and ClojureScript"
-date:   2014-04-15
+date:   2014-04-18
 categories: clojure clojurescript
 ---
 
@@ -12,7 +12,9 @@ I just want to briefly announce
 consistently crypto-hash [edn](https://github.com/edn-format/edn) in
 Clojure and ClojureScript. Practically this means you can create a UUID5
 from edn on either platform consistently (patches for CLR or other
-Clojure hosts welcome). {% highlight clojure %}
+Clojure hosts welcome). 
+
+{% highlight clojure %}
 
 (uuid ["hello world" {:a 3.14} #{42} '(if true nil \f)]) 
 => #uuid "18f594a3-be77-5449-a0b5-b71552e1d37a"
@@ -42,7 +44,8 @@ flat edn-level type information (e.g. strings and chars are the same
 type because of JavaScript). You can also use a different hashing
 algorithm and create similar UUIDs (but this doesn't satisfy the UUID
 standard yet).  Our UUID hash is internally versioned, so it can be
-fixed 4 times (before hopefully UUID5 will be superseded anyway).
+fixed 4 times (before hopefully UUID5 will be superseded with something
+better than SHA-1 anyway).
 
 Don't consider the hash stable yet, but only after some possible initial
 feedback for the next release(s).
@@ -77,5 +80,5 @@ which uses
  in cljs and `java.util.UUID/randomUUID` in Clojure.
 
 
-If you have ideas or find any flaws, please open an issue on github or
-leave a comment. Pull-requests are welcome!
+If you have ideas or find any flaws, please open an issue on
+github. Pull-requests are welcome!
