@@ -8,7 +8,7 @@ categories: clojure clojurescript
 # announcing *hasch*
 
 I just want to briefly announce
-[hasch](https://github.org/ghubber/hasch), a small library to
+[hasch](https://github.com/ghubber/hasch), a small library to
 consistently crypto-hash [edn](https://github.com/edn-format/edn) in
 Clojure and ClojureScript. Practically this means you can create a UUID5
 from edn on either platform consistently (patches for CLR or other
